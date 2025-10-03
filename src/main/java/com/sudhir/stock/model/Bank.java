@@ -1,5 +1,6 @@
 package com.sudhir.stock.model;
 
+import com.sudhir.stock.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,41 +12,41 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "user_table")
+@Table(name = "stock_table")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class Bank {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String username;
-
-    @Column(name = "full_name")
-    private String fullName;
-
-    @Column(nullable = false, unique = true)
-    private String email;
+    @Column(nullable = false)
+    private String bankName;
 
     @Column(nullable = false)
-    private String password;
+    private String bankHolderName;
 
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Column(nullable = false, unique = true)
+    private int accountNo;
 
-    private boolean verified = false;
+    @Column(nullable = false)
+    private String ifsc;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "bank_details", referencedColumnName = "id")
-    private Bank bankDetails;
+    private String bankAddress;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "stock_details", referencedColumnName = "id")
-    private Stock stockDetails;
+    @Column(unique = true)
+    private String panNo;
+
+    @Column(unique = true)
+    private String addharNo;
+
+    private String permanentAddress;
+
+    @OneToOne(mappedBy = "bankDetails")
+    private User user;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
