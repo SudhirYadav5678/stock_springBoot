@@ -1,5 +1,6 @@
 package com.sudhir.stock.model;
 
+import com.sudhir.stock.model.company.Company;
 import com.sudhir.stock.model.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -47,6 +48,9 @@ public class Bank {
 
     @OneToOne(mappedBy = "bankDetails")
     private User user;
+
+    @OneToOne(mappedBy = "bankDetails")
+    private Company company;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
